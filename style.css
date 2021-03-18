@@ -1,0 +1,10 @@
+body{
+    height: 100vh;
+    text-align: center;
+    display: grid;
+    grid-template-rows: repeat(12, 1fr);
+}
+
+.container{
+    grid-row: 2/8;
+}
