@@ -1,25 +1,42 @@
-const yesterdayButton = document.querySelector('.yesterday');
-const todayButton = document.querySelector('.today');
-const tomorrowButton = document.querySelector('.tomorrow');
+var yesterdayButton = document.querySelector('.yesterday');
+var todayButton = document.querySelector('.today');
+var tomorrowButton = document.querySelector('.tomorrow');
+var temperature = document.querySelector('.temperature');
 
-const cityInput = document.querySelector('.city-input');
-const input = cityInput.nodeValue; 
+var cityInput = document.querySelector('.city-input');
 
-const key = "741642e0a67311272db651cf02236ed2";
-const dataObj = "";
-
+var key = "741642e0a67311272db651cf02236ed2";
 
 async function getData(){
-    const response = await fetch (`api.openweathermap.org/data/2.5/weather?q=${input}&appid=${key}`);
-    const data = await response.json();
-    console.log(data);
-    return data;
+    var input = cityInput.value; 
+    fetch (`https://api.openweathermap.org/data/2.5/weather?q=${input}&appid=${key}`)
+    .then(response => response.json())
+    .then(data => {
+        var tempValue = data['main']['temp']
+        temperature.innerHTML = tempValue;
+    })
+    .catch(err => alert("Wrong city name!"))
 }
 
-todayButton.addEventListener("click", () => {
-   alert("You have built your first js app and it was simple!");
+// async function getData(){
+//     var input = cityInput.value; 
+//     try {
+//         var response = await fetch (`https://api.openweathermap.org/data/2.5/weather?q=${input}&appid=${key}`);
+//     } catch (error) {
+//         console.log(error)
+//     }
+//     var data = await response.json();
+//     console.log(data);
+//     return data;
+// }
 
+todayButton.addEventListener("click", () => {
+       getData();
 })
+
+
+
+
 
 
 /*
